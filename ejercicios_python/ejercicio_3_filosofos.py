@@ -67,7 +67,17 @@ def filosofo(id, rondas=3):
         # o utiliza un semáforo árbitro para evitar el interbloqueo (Deadlock).
         #
         # TODO: Adquiere los tenedores adyacentes de forma segura, invoca comer(id)
+        if id % 2 == 0:
+            primer_tenedor = tenedor_izq
+            segundo_tenedor = tenedor_der
+        else:
+            primer_tenedor = tenedor_der
+            segundo_tenedor = tenedor_izq
         # y libera los tenedores:
+        
+        with tenedores[primer_tenedor]:
+            with tenedores[segundo_tenedor]:
+                comer(id)
         pass
         # =========================================================================
         # FIN TODO
